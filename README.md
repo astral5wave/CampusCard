@@ -1,12 +1,49 @@
-# React + Vite
+# Smart Student ID Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A ReactJS project to generate smart student ID cards with customizable templates, QR code generation, and PNG download support.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- ReactJS 18+
+- TailwindCSS
+- `qrcode.react` for QR code
+- `html-to-image` for downloading as PNG
+- `localStorage` for persistent data
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Student Data Form**  
+  Includes:
+  - Name  
+  - Roll Number  
+  - Class & Division (dropdown)  
+  - Allergies (multi-select)  
+  - Photo Upload (with preview)  
+  - Rack Number  
+  - Bus Route Number (dropdown)  
+
+- **Smart ID Card Preview**  
+  Displays submitted data along with:
+  - QR Code (with full JSON)
+  - Photo
+  - Rack & Bus info
+  - Allergy details (if any)
+  - Download as PNG
+
+- **Template Switching**  
+  Two design templates:
+  - One with front only
+  - One with both front and back
+
+- **Persistent Data**  
+  Data is saved in `localStorage` so other routes can access it without passing props or using context.
+
+## Thought Process
+
+To simplify data flow across components and routes, I used `localStorage` to store submitted student data. This allows protected routes to access the data without relying on props or context API.
+
+For the QR code, `qrcode.react` is used to encode the full student data as JSON.
+
+During the download process:
+- If the selected theme has only the front side, only that is downloaded.
+- If the theme has both front and back, both are downloaded one after the other.
