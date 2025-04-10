@@ -40,10 +40,10 @@ A ReactJS project to generate smart student ID cards with customizable templates
 
 ## Thought Process
 
-To simplify data flow across components and routes, I used `localStorage` to store submitted student data. This allows protected routes to access the data without relying on props or context API.
+To simplify data flow across components and routes, I used `localStorage` to store submitted student data. This allows protected routes to access the data without relying on props or the context API.
 
 For the QR code, `qrcode.react` is used to encode the full student data as JSON.
 
 During the download process:
-- If the selected theme has only the front side, only that is downloaded.
-- If the theme has both front and back, both are downloaded one after the other.
+- If the selected template has only the front side, only that is downloaded.
+- If the template includes both front and back, both are downloaded one after the other.
