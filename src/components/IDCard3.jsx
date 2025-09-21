@@ -1,27 +1,27 @@
 import { motion } from "framer-motion";
 import Barcode from "react-barcode";
 import {
+  FaIdCard,
   FaSchool,
+  FaCalendarAlt,
   FaPhone,
   FaEnvelope,
-  FaIdCard,
-  FaCalendarAlt,
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
-const IDCard1 = ({ studentImage, studentInfo, universityInfo }) => {
+const IDCard3 = ({ studentImage, studentInfo,universityInfo }) => {
   const barcodeData = `${studentInfo.rollNumber}`;
 
   return (
     <div className="flex flex-col md:flex-row items-center gap-6 justify-center w-full h-full">
       <motion.div
+        id="front-id"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4 }}
-        id="front-id"
-        className="relative w-[280px] h-[420px] overflow-hidden rounded-xl shadow-md flex flex-col"
+        className="relative w-[280px] h-[420px] overflow-hidden rounded-3xl shadow-md flex flex-col"
         style={{
-          background: "linear-gradient(135deg, #3b82f6 0%, #9333ea 100%)",
+          background: "linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)",
         }}
       >
         <div className="p-3 text-center bg-white/10">
@@ -46,36 +46,41 @@ const IDCard1 = ({ studentImage, studentInfo, universityInfo }) => {
 
         <div className="flex-1 px-4 py-2 text-sm text-white space-y-2">
           <div className="flex items-center gap-2">
-            <FaIdCard size={16} /> <span>{studentInfo.registrationNumber}</span>
+            <FaIdCard size={16} />{" "}
+            <span>{studentInfo.registrationNumber}</span>
           </div>
           <div className="flex items-center gap-2">
             <FaSchool size={16} />{" "}
             <span className="truncate">{studentInfo.departmentName}</span>
           </div>
-          <div className="flex items-center gap-2">
-            <FaCalendarAlt size={16} />{" "}
-            <span>
-              {new Date(studentInfo.dateOfBirth).toLocaleDateString()}
-            </span>
-          </div>
-          <div className="flex items-center gap-2">
-            <FaPhone size={16} /> <span>{studentInfo.phoneNumber}</span>
-          </div>
-          <div className="flex items-center gap-2 break-all">
-            <FaEnvelope size={16} />{" "}
-            <span className="truncate">{studentInfo.email}</span>
-          </div>
+          {studentInfo.dateOfBirth && (
+            <div className="flex items-center gap-2">
+              <FaCalendarAlt size={16} />{" "}
+              <span>{new Date(studentInfo.dateOfBirth).toLocaleDateString()}</span>
+            </div>
+          )}
+          {studentInfo.phoneNumber && (
+            <div className="flex items-center gap-2">
+              <FaPhone size={16} /> <span>{studentInfo.phoneNumber}</span>
+            </div>
+          )}
+          {studentInfo.email && (
+            <div className="flex items-center gap-2 break-all">
+              <FaEnvelope size={16} />{" "}
+              <span className="truncate">{studentInfo.email}</span>
+            </div>
+          )}
         </div>
       </motion.div>
 
       <motion.div
+        id="back-id"
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.4, delay: 0.2 }}
-        id="back-id"
-        className="relative w-[280px] h-[420px] overflow-hidden rounded-xl shadow-md flex flex-col"
+        className="relative w-[280px] h-[420px] overflow-hidden rounded-3xl shadow-md flex flex-col"
         style={{
-          background: "linear-gradient(135deg, #fbbf24 0%, #f97316 100%)",
+          background: "linear-gradient(135deg, #1f2937, #111827)",
         }}
       >
         <div className="p-3 text-center bg-white/10">
@@ -109,16 +114,11 @@ const IDCard1 = ({ studentImage, studentInfo, universityInfo }) => {
           <p className="text-xs italic text-white text-center px-3">
             "Empowering Students Through Innovation & Education"
           </p>
-          <Barcode
-            value={barcodeData}
-            height={40}
-            width={1}
-            displayValue={false}
-          />
+          <Barcode value={barcodeData} height={40} width={1} displayValue={false} />
         </div>
       </motion.div>
     </div>
   );
 };
 
-export default IDCard1;
+export default IDCard3;
